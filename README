@@ -1,0 +1,21 @@
+Name: Colt Gainey & Tanner Breckenridge
+
+Course: CPSC 4160
+
+Clemson Email Address: ctgaine@clemson.edu tbrecke@clemson.edu
+
+Project no: #4
+
+Project due date: Feb 29th (sorry)
+
+Project description: Create a game in SDL with AI that reacts to you.
+
+The easiest part of this project: Very little was easy because I can be dumb
+
+Problems that I had in completing this project: Mostly everything was hard
+because I can be dumb
+
+A few sentences describing my proposed project: 
+	Tile based turn based combat with an indeterminate number of players / 
+	AI. Items are on the battlefield, and can be picked up to deal damage.
+	Walkable / Impassable tiles.
