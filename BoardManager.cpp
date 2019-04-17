@@ -20,8 +20,8 @@ BoardManager::BoardManager(int s) {
   for ( int row = 0; row < s; row++ ) {
     for ( int col = 0; col < s; col++ ) {
       std::stringstream ss;
-      ss << "Wall" << map[row][col];
-      tiles[row][col] = new BackgroundTile(ss.str(), (row * 200), (col * 200));
+      ss << "Tile" << map[row][col];
+      tiles[row][col] = new BackgroundTile(ss.str(), (row * 100), (col * 100));
     }
   }
 
@@ -76,14 +76,26 @@ int BoardManager::getPlayerY(int player) {
 ==============================================================================*/
 void BoardManager::movePlayer(int player, int dir, int tiles) {
   if (player == 0) {
-    if (dir == 0 && (human->getX()-tiles) >= 0 && ((ai->getX() != human->getX() - tiles) || (ai->getY() != human->getY())))
+    // Move Left
+    if (dir == 0 && (human->getX()-tiles) >= 0 && ((ai->getX() != human->getX() - tiles) || (ai->getY() != human->getY()))){
       human->moveDirection(dir, tiles);
-    else if (dir == 1 && (human->getX()-tiles ) < (size-2) * tiles && ((ai->getX() != human->getX() + tiles) || (ai->getY() != human->getY())))
+      // std::cout << "move!" << std::endl;
+    }
+    // Move Right
+    else if (dir == 1 && (human->getX()-tiles ) < (size-2) * tiles && ((ai->getX() != human->getX() + tiles) || (ai->getY() != human->getY()))){
       human->moveDirection(dir, tiles);
-    else if (dir == 2 && (human->getY()-tiles) >= 0 && ((ai->getY() != human->getY() - tiles) || (ai->getX() != human->getX())))
+      // std::cout << "move!" << std::endl;
+    }
+    //Move Up
+    else if (dir == 2 && (human->getY()-tiles) >= 0 && ((ai->getY() != human->getY() - tiles) || (ai->getX() != human->getX()))){
       human->moveDirection(dir, tiles);
-    else if (dir == 3 && (human->getY()-tiles) < (size-2) * tiles && ((ai->getY() != human->getY() + tiles) || (ai->getX() != human->getX())))
+      // std::cout << "move!" << std::endl;
+    }
+    //Move Down
+    else if (dir == 3 && (human->getY()-tiles) < (size-2) * tiles && ((ai->getY() != human->getY() + tiles) || (ai->getX() != human->getX()))){
       human->moveDirection(dir, tiles);
+      // std::cout << "move!" << std::endl;
+    }
 
   } else {
     if (dir == 0 && (ai->getX()-tiles) >= 0

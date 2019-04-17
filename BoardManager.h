@@ -26,7 +26,7 @@ private:
   //std::vector<Player> players;
   Player *human;
   Player *ai;
-  int map[5][5];
+  int map[10][10];
   unsigned int size;
 };
 

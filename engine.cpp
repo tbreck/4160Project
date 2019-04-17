@@ -37,7 +37,7 @@ Engine::Engine(int size) :
 }
 
 void Engine::draw() const {
-  SDL_Color Name_color = {200, 200, 200, 200};
+  SDL_Color Name_color = {100, 100, 100, 100};
   board.drawTiles();
   io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
 
@@ -110,14 +110,14 @@ void Engine::play() {
       /* Flip a coin to see if we will go up or down. */
       if (rand() % 2 == 0) {
         /* If the player is to the right, go right. */
-        if (player_x > ai_x) board.movePlayer(1, 1, 200);
+        if (player_x > ai_x) board.movePlayer(1, 1, 100);
         /* Otherwise, go left. */
-        else board.movePlayer(1, 0, 200);
+        else board.movePlayer(1, 0, 100);
       } else {
         /* If the player is below us, go down. */
-        if (player_y > ai_y) board.movePlayer(1, 3, 200);
+        if (player_y > ai_y) board.movePlayer(1, 3, 100);
         /* Otherwise, go up. */
-        else board.movePlayer(1, 2, 200);
+        else board.movePlayer(1, 2, 100);
       }
 
 
@@ -155,19 +155,19 @@ void Engine::play() {
           }
           else if (keystate[SDL_SCANCODE_A]) {
             action_registered = true;
-            board.movePlayer(0, 0, 200);
+            board.movePlayer(0, 0, 100);
           }
           else if (keystate[SDL_SCANCODE_D]) {
             action_registered = true;
-            board.movePlayer(0, 1, 200);
+            board.movePlayer(0, 1, 100);
           }
           else if (keystate[SDL_SCANCODE_W]) {
             action_registered = true;
-            board.movePlayer(0, 2, 200);
+            board.movePlayer(0, 2, 100);
           }
           else if (keystate[SDL_SCANCODE_S]) {
             action_registered = true;
-            board.movePlayer(0, 3, 200);
+            board.movePlayer(0, 3, 100);
           }
         }
       }

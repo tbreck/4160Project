@@ -33,7 +33,7 @@ const SDL_Surface* Player::getSurface() const {
 }
 Player::Player(std::string tag, int row, int col) :
   /*Adjust later for scale!!!!*/
-  Drawable(tag, Vector2f(row * 200, col * 200), Vector2f(0, 0), 1.0),
+  Drawable(tag, Vector2f(row * 100, col * 100), Vector2f(0, 0), 1.0),
   sprites (ImageFactory::getInstance().getImages(tag)),
   cur_row(row),
   cur_col(col),
