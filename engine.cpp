@@ -37,7 +37,7 @@ Engine::Engine(int size) :
 }
 
 void Engine::draw() const {
-  SDL_Color Name_color = {100, 100, 100, 100};
+  SDL_Color Name_color = {255, 100, 0, 255};
   board.drawTiles();
   io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
 
