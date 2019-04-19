@@ -6,6 +6,7 @@
 #include "gameData.h"
 #include "BackgroundTile.h"
 #include "Player.h"
+#include "item.h"
 #include <vector>
 
 class BoardManager {
@@ -22,8 +23,9 @@ public:
 
 private:
   std::vector<std::vector<BackgroundTile*>> tiles;
-    //std::vector<std::vector<Item*>> items;
-  //std::vector<Player> players;
+  //std::vector<std::vector<Item*>> items;
+  Item *items[10][10];
+  std::vector<Player> players;
   Player *human;
   Player *ai;
   int map[10][10];

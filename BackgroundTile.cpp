@@ -31,14 +31,26 @@ const SDL_Surface* BackgroundTile::getSurface() const {
 /*==============================================================================
 ==============================================================================*/
 BackgroundTile::BackgroundTile(const std::string& tile_id,
-                               int x, int y) :
+                               int x, int y, int _ID) :
   Drawable(tile_id, Vector2f(x, y), Vector2f(0, 0), 1.0),
   tile( ImageFactory::getInstance().getImage(tile_id) ),
-  item_on_tile(false),
   player_on_tile(false),
   x_offset(x),
   y_offset(y),
-  life_span(0) {}
+  life_span(0),
+  ID(_ID) {
+    /* Set item states and walkable state based on the ID based in. */
+    switch (ID) {
+      case 1: isWalkable = false; item_on_tile = false; break;
+      case 2: isWalkable = false; item_on_tile = false; break;
+      case 3: isWalkable = true;  item_on_tile = false; break;
+      case 4: isWalkable = true;  item_on_tile = true;  break;
+      case 5: isWalkable = false; item_on_tile = false; break;
+      case 6: isWalkable = false; item_on_tile = false; break;
+      case 7: isWalkable = false; item_on_tile = false; break;
+      case 8: isWalkable = false; item_on_tile = false; break;
+    }
+  }
 /*==============================================================================
 ==============================================================================*/
 BackgroundTile::~BackgroundTile() {

@@ -64,6 +64,11 @@ Tile8: Bend S->E
   <transparency>true</transparency>
 </HUD>
 
+<Crate>
+  <file>assets/Rock3.png</file>
+  <transparency>true</transparency>
+</Crate>
+
 <Tile1>
   <file>assets/Tile1.png</file>
   <transparency>true</transparency>

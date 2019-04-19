@@ -26,6 +26,7 @@ OBJS = \
 	BoardManager.o \
 	Player.o \
 	HUDDisplay.o \
+	item.o \
 	main.o
 EXEC = run
 

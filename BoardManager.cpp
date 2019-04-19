@@ -21,7 +21,16 @@ BoardManager::BoardManager(int s) {
     for ( int col = 0; col < s; col++ ) {
       std::stringstream ss;
       ss << "Tile" << map[row][col];
-      tiles[row][col] = new BackgroundTile(ss.str(), (row * 100), (col * 100));
+      tiles[row][col] = new BackgroundTile(ss.str(), (row * 100), (col * 100), map[row][col]);
+    }
+  }
+
+  for ( int row = 0; row < s; row++ ) {
+    for ( int col = 0; col < s; col++ ) {
+      /* If item placeholder detected. */
+      if (map[row][col] == 4) {
+        items[row][col] = new Item("Crate", row * 100, col * 100);
+      }
     }
   }
 
@@ -34,6 +43,9 @@ void BoardManager::drawTiles() const {
   for (unsigned int i = 0; i < this->size; i++) {
     for (unsigned int j = 0; j < this->size; j++) {
       tiles[i][j]->draw();
+      if (map[i][j] == 4) {
+        items[i][j]->draw();
+      }
     }
   }
   human->draw();
@@ -74,46 +86,59 @@ int BoardManager::getPlayerY(int player) {
 }
 /*==============================================================================
 ==============================================================================*/
-void BoardManager::movePlayer(int player, int dir, int tiles) {
+void BoardManager::movePlayer(int player, int dir, int t) {
+
+  /* Tiles 3 and 4 are walkable. */
+
+  /* HUMAN */
   if (player == 0) {
     // Move Left
-    if (dir == 0 && (human->getX()-tiles) >= 0 && ((ai->getX() != human->getX() - tiles) || (ai->getY() != human->getY()))){
-      human->moveDirection(dir, tiles);
+    if (dir == 0 && (human->getX()-t) >= 0 && ((ai->getX() != human->getX() - t) || (ai->getY() != human->getY()))
+        && tiles[(human->getX() - 1) / 100][human->getY() / 100]->isWalkable){
+      human->moveDirection(dir, t);
       // std::cout << "move!" << std::endl;
     }
     // Move Right
-    else if (dir == 1 && (human->getX()-tiles ) < (size-2) * tiles && ((ai->getX() != human->getX() + tiles) || (ai->getY() != human->getY()))){
-      human->moveDirection(dir, tiles);
+    else if (dir == 1 && (human->getX()-t ) < (size-2) * t && ((ai->getX() != human->getX() + t) || (ai->getY() != human->getY()))
+             && tiles[((human->getX() + 1) / 100) + 1][human->getY() / 100]->isWalkable){
+      human->moveDirection(dir, t);
       // std::cout << "move!" << std::endl;
     }
     //Move Up
-    else if (dir == 2 && (human->getY()-tiles) >= 0 && ((ai->getY() != human->getY() - tiles) || (ai->getX() != human->getX()))){
-      human->moveDirection(dir, tiles);
+    else if (dir == 2 && (human->getY()-t) >= 0 && ((ai->getY() != human->getY() - t) || (ai->getX() != human->getX()))
+             && tiles[human->getX() / 100][(human->getY() - 1) / 100]->isWalkable){
+      human->moveDirection(dir, t);
       // std::cout << "move!" << std::endl;
     }
     //Move Down
-    else if (dir == 3 && (human->getY()-tiles) < (size-2) * tiles && ((ai->getY() != human->getY() + tiles) || (ai->getX() != human->getX()))){
-      human->moveDirection(dir, tiles);
+    else if (dir == 3 && (human->getY()-t) < (size-2) * t && ((ai->getY() != human->getY() + t) || (ai->getX() != human->getX()))
+             && tiles[human->getX() / 100][((human->getY() + 1) / 100) + 1]->isWalkable){
+      human->moveDirection(dir, t);
       // std::cout << "move!" << std::endl;
     }
 
+    /* AI */
   } else {
-    if (dir == 0 && (ai->getX()-tiles) >= 0
-                 && ((human->getX() != ai->getX() - tiles)
-                 || (human->getY() != ai->getY())))
-      ai->moveDirection(dir, tiles);
-    else if (dir == 1 && (ai->getX()-tiles ) < (size-2) * tiles
-                      && ((human->getX() != ai->getX() + tiles)
-                      || (human->getY() != ai->getY())))
-      ai->moveDirection(dir, tiles);
-    else if (dir == 2 && (ai->getY()-tiles) >= 0
-                      && ((human->getY() != ai->getY() - tiles)
-                      || (human->getX() != ai->getX())))
-      ai->moveDirection(dir, tiles);
-    else if (dir == 3 && (ai->getY()-tiles) < (size-2) * tiles
-                      && ((human->getY() != ai->getY() + tiles)
-                      || (human->getX() != ai->getX())))
-      ai->moveDirection(dir, tiles);
+    if (dir == 0 && (ai->getX()-t) >= 0
+                 && ((human->getX() != ai->getX() - t)
+                 || (human->getY() != ai->getY()))
+                 && tiles[(ai->getX() - 1) / 100][ai->getY() / 100]->isWalkable)
+      ai->moveDirection(dir, t);
+    else if (dir == 1 && (ai->getX()-t ) < (size-2) * t
+                      && ((human->getX() != ai->getX() + t)
+                      || (human->getY() != ai->getY()))
+                      && tiles[((ai->getX() + 1) / 100) + 1][ai->getY() / 100]->isWalkable)
+      ai->moveDirection(dir, t);
+    else if (dir == 2 && (ai->getY()-t) >= 0
+                      && ((human->getY() != ai->getY() - t)
+                      || (human->getX() != ai->getX()))
+                      && tiles[ai->getX() / 100][(ai->getY() - 1) / 100]->isWalkable)
+      ai->moveDirection(dir, t);
+    else if (dir == 3 && (ai->getY()-t) < (size-2) * t
+                      && ((human->getY() != ai->getY() + t)
+                      || (human->getX() != ai->getX()))
+                      && tiles[ai->getX() / 100][((ai->getY() + 1) / 100) + 1]->isWalkable)
+      ai->moveDirection(dir, t);
     //AI movement
   }
 }

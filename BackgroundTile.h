@@ -25,10 +25,12 @@ public:
   int getScaledHeight()  const;
   virtual const Image* getImage() const;
   virtual const SDL_Surface* getSurface() const;
-  BackgroundTile(const std::string&, int x, int y);
+  BackgroundTile(const std::string&, int x, int y, int _ID);
   BackgroundTile(const BackgroundTile&) = delete;
   BackgroundTile& operator=(const BackgroundTile&) = delete;
   ~BackgroundTile();
+  bool isWalkable;
+  int ID;
 
 private:
   Image *tile;
