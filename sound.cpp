@@ -23,7 +23,7 @@ SDLSound::SDLSound() :
   music(NULL),
   audioRate(22050),
   audioChannels(2),
-  audioBuffers(1000000),
+  audioBuffers(8192),
   sounds(),
   channels()
 {
@@ -32,7 +32,7 @@ SDLSound::SDLSound() :
                    audioBuffers)){
     throw string("Unable to open audio!");
   }
-  music = Mix_LoadMUS("assets/Music/musicforgame.wav");
+  music = Mix_LoadMUS("assets/Music/musicforgame.ogg");
   // Need to install midi to play the following:
   // music = Mix_LoadMUS("sound/ballad2.mid");
   if (!music) throw string("Couldn't load musicforgame.mp3")+Mix_GetError();

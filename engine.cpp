@@ -104,7 +104,7 @@ void Engine::play() {
   // int HUD_toggle = 0;
 
   while ( !done ) {
-    if (!music_playing) music->toggleMusic();
+    //if (!music_playing) music->toggleMusic();
     // bool f1_pressed = false;
     if ((cur_player % 2) == 1) {
       int player_x = board.getPlayerX(0);
