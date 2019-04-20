@@ -6,6 +6,7 @@
 #include <random>
 #include <iomanip>
 #include "sprite.h"
+#include "sound.h"
 #include "multisprite.h"
 #include "gameData.h"
 #include "engine.h"
@@ -25,6 +26,7 @@ Engine::Engine(int size) :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
+  music( new SDLSound() ),
   renderer( rc->getRenderer() ),
   viewport( Viewport::getInstance() ),
   sprites(),
@@ -94,6 +96,7 @@ void Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
+  bool music_playing = false;
   Uint32 ticks = clock.getElapsedTicks();
   FrameGenerator frameGen;
 
@@ -101,6 +104,7 @@ void Engine::play() {
   // int HUD_toggle = 0;
 
   while ( !done ) {
+    if (!music_playing) music->toggleMusic();
     // bool f1_pressed = false;
     if ((cur_player % 2) == 1) {
       int player_x = board.getPlayerX(0);

@@ -4,6 +4,7 @@
 #include <vector>
 #include <SDL.h>
 #include "ioMod.h"
+#include "sound.h"
 #include "renderContext.h"
 #include "clock.h"
 #include "world.h"
@@ -28,6 +29,7 @@ private:
   const RenderContext* rc;
   const IoMod& io;
   Clock& clock;
+  SDLSound *music;
 
   SDL_Renderer * const renderer;
   Viewport& viewport;

@@ -1,9 +1,10 @@
 CXX = g++
 
 # Warnings frequently signal eventual errors:
-CXXFLAGS=`sdl2-config --cflags` -g -W -Wall -std=c++11  -O0 -I `sdl2-config --prefix`/include/
+CXXFLAGS=`sdl2-config --cflags` -g -W -Wall -std=c++11 -Weffc++ -Wextra -pedantic -O0 -I `sdl2-config --prefix`/include/
 
-LDFLAGS = `sdl2-config --libs` -lm -lexpat -lSDL2_ttf -lSDL2_image
+LDFLAGS = `sdl2-config --libs` -lm -lexpat -lSDL2_ttf -lSDL2_image -lSDL2_mixer
+
 
 OBJS = \
   renderContext.o \
@@ -27,6 +28,7 @@ OBJS = \
 	Player.o \
 	HUDDisplay.o \
 	item.o \
+	sound.o \
 	main.o
 EXEC = run
 
