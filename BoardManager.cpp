@@ -29,13 +29,15 @@ BoardManager::BoardManager(int s) {
     for ( int col = 0; col < s; col++ ) {
       /* If item placeholder detected. */
       if (map[row][col] == 4) {
-        items[row][col] = new Item("Crate", row * 100, col * 100);
+        std::stringstream ss;
+        ss << "Crate";
+        items[row][col] = new Item(ss.str(), row * 100, col * 100);
       }
     }
   }
 
   this->human = new Player("human", 0, 0);
-  this->ai = new Player("human", 8, 9);
+  this->ai = new Player("AI", 8, 9);
 }
 /*==============================================================================
 ==============================================================================*/
@@ -54,6 +56,11 @@ void BoardManager::drawTiles() const {
 /*==============================================================================
 ==============================================================================*/
 void BoardManager::update(Uint32 ticks) {
+  // for (unsigned int i = 0; i < this->size; i++) {
+  //   for (unsigned int j = 0; j < this->size; j++) {
+  //     items[i][j]->update(ticks);
+  //   }
+  // }
   human->update(ticks);
   ai->update(ticks);
 }

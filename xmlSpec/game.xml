@@ -119,9 +119,12 @@ Tile8: Bend S->E
 </human>
 
 <AI>
-  <file>assets/Players/Human1.png</file>
-  <frame>4</frame>
-  <frameInterval>50</frameInterval>
+  <file>assets/Players/AI.png</file>
+  <frames>5</frames>
+  <animFrame>3</animFrame>
+  <damageFrame>4</damageFrame>
+  <frameInterval>300</frameInterval>
+  <transparency>true</transparency>
 </AI>
 
 

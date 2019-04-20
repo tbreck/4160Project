@@ -121,7 +121,9 @@ void Engine::play() {
       }
 
 
-    } else {
+    }
+    //This whole key register is very hacky, only way that we were able to get the F1 to work properly
+    else {
       bool action_registered = false;
       // The next loop polls for events, guarding against key bounce:
       while (!action_registered ) {
@@ -135,12 +137,13 @@ void Engine::play() {
             frameGen.makeFrame();
           }
         }
-        SDL_PollEvent(&event);
+        while ( SDL_PollEvent(&event) ) {
         keystate = SDL_GetKeyboardState(NULL);
         if (event.type ==  SDL_QUIT) { done = true; break; }
         if(event.type == SDL_KEYDOWN) {
           if (keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_Q]) {
             done = true;
+            action_registered = true;
             break;
           }
 
@@ -172,6 +175,7 @@ void Engine::play() {
         }
       }
     }
+  }
     // In this section of the event loop we allow key bounce:
     cur_player++;
   }
