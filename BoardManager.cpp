@@ -31,7 +31,7 @@ BoardManager::BoardManager(int s) {
       if (map[row][col] == 4) {
         std::stringstream ss;
         ss << "Crate";
-        items[row][col] = new Item(ss.str(), row * 100, col * 100);
+        items[row][col] = new Item(ss.str(), row, col);
       }
     }
   }
