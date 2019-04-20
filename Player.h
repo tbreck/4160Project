@@ -20,11 +20,12 @@ public:
   Player(const Player&) = delete;
   Player& operator=(const Player&) = delete;
   ~Player();
+  int cur_row, cur_col;
+  bool bow;
 
 private:
 
   std::vector<Image*> sprites;
-  int cur_row, cur_col;
   int current_frame;
   int anim_frames;
   int damage_frame;

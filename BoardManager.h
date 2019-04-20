@@ -20,6 +20,9 @@ public:
   void movePlayer(int, int, int);
   int getPlayerX(int);
   int getPlayerY(int);
+  bool playerHasBow(int) const;
+  bool humanHasBow;
+  bool AIHasBow;
 
 private:
   std::vector<std::vector<BackgroundTile*>> tiles;

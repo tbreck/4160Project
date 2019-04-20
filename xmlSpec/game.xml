@@ -59,13 +59,18 @@ Tile8: Bend S->E
   <alpha>0</alpha>
 </font>
 
+<Bow>
+  <file>assets/Bow.png</file>
+  <transparency>true</transparency>
+</Bow>
+
 <HUD>
-  <file>assets/HUD.png</file>
+  <file>assets/HUD2.png</file>
   <transparency>true</transparency>
 </HUD>
 
 <Crate>
-  <file>assets/Rock3.png</file>
+  <file>assets/Crate.png</file>
   <transparency>true</transparency>
 </Crate>
 

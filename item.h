@@ -16,7 +16,7 @@ public:
   int getScaledHeight()  const;
   virtual const Image* getImage() const;
   virtual const SDL_Surface* getSurface() const;
-  Item(std::string, int, int);
+  Item(std::string, int, int, int);
   Item(const Item&) = delete;
   Item& operator=(const Item&) = delete;
   ~Item();

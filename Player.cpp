@@ -7,6 +7,9 @@ void Player::moveDirection(int direction, int tiles) {
     case 2: setY(getY() - tiles); break; // Move Up
     case 3: setY(getY() + tiles); break; // Move Down
   }
+
+  cur_row = getX() / 100;
+  cur_col = getY() / 100;
 }
 
 void Player::draw() const {
@@ -41,6 +44,7 @@ Player::Player(std::string tag, int row, int col) :
   anim_frames(Gamedata::getInstance().getXmlInt(name+"/animFrame")),
   damage_frame(Gamedata::getInstance().getXmlInt(name+"/damageFrame")),
   health(100),
+  bow(false),
   movements_left(1),
   attacks_left(1),
   frame_interval(Gamedata::getInstance().getXmlInt(name+"/frameInterval")),

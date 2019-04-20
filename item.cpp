@@ -18,8 +18,8 @@ const Image* Item::getImage() const {
 const SDL_Surface* Item::getSurface() const {
   return sprite->getSurface();
 }
-Item::Item(std::string tag, int row, int col) :
-  Drawable(tag, Vector2f(row * 100, col * 100), Vector2f(0, 0), 1.0),
+Item::Item(std::string tag, int row, int col, int s) :
+  Drawable(tag, Vector2f(row * s, col * s), Vector2f(0, 0), 1.0),
   sprite (ImageFactory::getInstance().getImage(tag)),
   cur_row(row),
   cur_col(col),

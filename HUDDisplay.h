@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include "drawable.h"
+#include "item.h"
 #include <vector>
 
 class HUDDisplay : public Drawable {
@@ -18,6 +19,10 @@ public:
   HUDDisplay(const HUDDisplay&) = delete;
   HUDDisplay& operator=(const HUDDisplay&) = delete;
   ~HUDDisplay();
+  bool humanHasBow;
+  bool AIHasBow;
+  Item *humanBow;
+  Item *AIBow;
 private:
   Image *HUD;
   int life_span;

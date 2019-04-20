@@ -10,6 +10,12 @@ BoardManager::BoardManager(int s) {
   //for (auto &val : map) val.resize(s);
 
   for (int i = 0; i < s; i++) {
+    for (int j = 0; j < s; j++ ) {
+      items[i][j] = NULL;
+    }
+  }
+
+  for (int i = 0; i < s; i++) {
     for (int j = 0; j < s; j++) {
       std::stringstream ss;
       ss << i << j;
@@ -31,13 +37,24 @@ BoardManager::BoardManager(int s) {
       if (map[row][col] == 4) {
         std::stringstream ss;
         ss << "Crate";
-        items[row][col] = new Item(ss.str(), row, col);
+        items[row][col] = new Item(ss.str(), row, col, 100);
       }
     }
   }
+  humanHasBow = false;
+  AIHasBow = false;
 
   this->human = new Player("human", 0, 0);
   this->ai = new Player("AI", 8, 9);
+}
+/*==============================================================================
+==============================================================================*/
+bool BoardManager::playerHasBow(int p) const{
+  if (p == 0) {
+    return human->bow;
+  } else {
+    return ai->bow;
+  }
 }
 /*==============================================================================
 ==============================================================================*/
@@ -103,6 +120,7 @@ void BoardManager::movePlayer(int player, int dir, int t) {
     if (dir == 0 && (human->getX()-t) >= 0 && ((ai->getX() != human->getX() - t) || (ai->getY() != human->getY()))
         && tiles[(human->getX() - 1) / 100][human->getY() / 100]->isWalkable){
       human->moveDirection(dir, t);
+
       // std::cout << "move!" << std::endl;
     }
     // Move Right
@@ -146,6 +164,19 @@ void BoardManager::movePlayer(int player, int dir, int t) {
                       || (human->getX() != ai->getX()))
                       && tiles[ai->getX() / 100][((ai->getY() + 1) / 100) + 1]->isWalkable)
       ai->moveDirection(dir, t);
-    //AI movement
   }
+
+  std::cout << human->cur_col << ' ' << human->cur_row << std::endl;
+  if (items[human->cur_row][human->cur_col] != NULL) {
+     std::cout << "Item!\n";
+     items[human->cur_row][human->cur_col] = new Item("Crate", -1, -1, 100);
+     human->bow = true;
+  }
+  if (items[ai->cur_row][ai->cur_col] != NULL) {
+     std::cout << "Item!\n";
+     items[ai->cur_row][ai->cur_col] = new Item("Crate", -1, -1, 100);
+     ai->bow = true;
+  }
+  if (human->bow == true) humanHasBow = true;
+  if (ai->bow == true) AIHasBow = true;
 }

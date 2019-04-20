@@ -41,7 +41,7 @@ Engine::Engine(int size) :
 void Engine::draw() const {
   SDL_Color Name_color = {255, 100, 0, 255};
   board.drawTiles();
-  io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
+  //io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
 
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->draw();
@@ -51,10 +51,16 @@ void Engine::draw() const {
     HUD->draw();
     std::stringstream fps;
     fps << clock.getFps();
-    io.writeText(fps.str(), 0, 0, Name_color);
-    io.writeText("W A S D to move!", 20, 30, Name_color);
+    //io.writeText(fps.str(), 0, 0, Name_color);
+    if (board.humanHasBow) {
+      HUD->humanBow->draw();
+    }
+    if (board.AIHasBow) {
+      HUD->AIBow->draw();
+    }
+    //io.writeText("W A S D to move!", 20, 30, Name_color);
   } else if (!HUD_ON){
-    HUD->setX(-400);
+    HUD->setX(-1000);
     HUD->draw();
   }
 
