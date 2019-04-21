@@ -25,6 +25,12 @@ void Player::update(Uint32 ticks) {
 int Player::getScaledWidth()  const {
   return getScale() * sprites[current_frame]->getWidth();
 }
+int Player::getCurRow() const {
+  return cur_row;
+}
+int Player::getCurCol() const {
+  return cur_col;
+}
 int Player::getScaledHeight()  const {
   return getScale() * sprites[current_frame]->getHeight();
 }

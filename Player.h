@@ -14,6 +14,8 @@ public:
   virtual void update(Uint32 ticks);
   int getScaledWidth()  const;
   int getScaledHeight()  const;
+  int getCurRow() const;
+  int getCurCol() const;
   virtual const Image* getImage() const;
   virtual const SDL_Surface* getSurface() const;
   Player(std::string, int, int);

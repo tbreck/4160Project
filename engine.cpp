@@ -191,6 +191,40 @@ void Engine::play() {
             board.movePlayer(0, 3, 100);
             (*music)[1];
           }
+          /* If F is pressed: */
+          else if (keystate[SDL_SCANCODE_F]) {
+            if (board.humanHasBow) {
+              board.shootProjectile(board.human->getCurRow(), board.human->getCurCol(), board.human->getCurRow() + 3, board.human->getCurCol());
+              // while ( SDL_PollEvent(&event) ) {
+              //   std::cout << "Waiting for key press..." << std::endl;
+              //   keystate = SDL_GetKeyboardState(NULL);
+              //   if(event.type == SDL_KEYDOWN) {
+              //     if (keystate[SDL_SCANCODE_A]) {
+              //       action_registered = true;
+              //       //board.movePlayer(0, 0, 100);
+              //       (*music)[1];
+              //     }
+              //     else if (keystate[SDL_SCANCODE_D]) {
+              //       action_registered = true;
+              //       //board.movePlayer(0, 1, 100);
+              //       (*music)[1];
+              //     }
+              //     else if (keystate[SDL_SCANCODE_W]) {
+              //       action_registered = true;
+              //       //board.movePlayer(0, 2, 100);
+              //       (*music)[1];
+              //     }
+              //     else if (keystate[SDL_SCANCODE_S]) {
+              //       action_registered = true;
+              //       //board.movePlayer(0, 3, 100);
+              //       (*music)[1];
+              //     }
+              //   }
+              // }
+              std::cout << "human wants to shoot with bow!" << std::endl;
+              //board.shootProjectile(human->getCurRow(), human->getCurCol())
+            }
+          }
         }
       }
     }

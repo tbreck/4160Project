@@ -64,6 +64,11 @@ Tile8: Bend S->E
   <transparency>true</transparency>
 </Bow>
 
+<Arrow>
+  <file>assets/w-e.png</file>
+  <transparency>true</transparency>
+</Arrow>
+
 <HUD>
   <file>assets/HUD2.png</file>
   <transparency>true</transparency>

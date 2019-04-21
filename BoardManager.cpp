@@ -105,6 +105,18 @@ int BoardManager::getPlayerY(int player) {
 }
 /*==============================================================================
 ==============================================================================*/
+void BoardManager::shootProjectile(int x1, int y1, int x2, int y2) {
+  Vector2f pos;
+  pos[0] = human->getX();
+  pos[1] = human->getY();
+  Vector2f vel;
+  vel[0] = 100;
+  vel[1] = 0;
+  Sprite *proj = new Sprite("Arrow", pos, vel, ImageFactory::getInstance().getImage("Arrow"), 1.0);
+  proj->draw();
+}
+/*==============================================================================
+==============================================================================*/
 void BoardManager::movePlayer(int player, int dir, int t) {
 
   /* Tiles 3 and 4 are walkable. */
