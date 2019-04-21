@@ -160,27 +160,36 @@ void Engine::play() {
           if ( keystate[SDL_SCANCODE_P] ) {
             if ( clock.isPaused() ) clock.unpause();
             else clock.pause();
+            (*music)[0];
+          }
+          if ( keystate[SDL_SCANCODE_SPACE] ) {
+            music->toggleMusic();
           }
           //F1 has key bounce pretty bad
           else if (keystate[SDL_SCANCODE_F1]) {
             if (!HUD_ON) Active_HUD();
             else No_HUD();
+            (*music)[0];
           }
           else if (keystate[SDL_SCANCODE_A]) {
             action_registered = true;
             board.movePlayer(0, 0, 100);
+            (*music)[1];
           }
           else if (keystate[SDL_SCANCODE_D]) {
             action_registered = true;
             board.movePlayer(0, 1, 100);
+            (*music)[1];
           }
           else if (keystate[SDL_SCANCODE_W]) {
             action_registered = true;
             board.movePlayer(0, 2, 100);
+            (*music)[1];
           }
           else if (keystate[SDL_SCANCODE_S]) {
             action_registered = true;
             board.movePlayer(0, 3, 100);
+            (*music)[1];
           }
         }
       }

@@ -73,11 +73,6 @@ void BoardManager::drawTiles() const {
 /*==============================================================================
 ==============================================================================*/
 void BoardManager::update(Uint32 ticks) {
-  // for (unsigned int i = 0; i < this->size; i++) {
-  //   for (unsigned int j = 0; j < this->size; j++) {
-  //     items[i][j]->update(ticks);
-  //   }
-  // }
   human->update(ticks);
   ai->update(ticks);
 }
