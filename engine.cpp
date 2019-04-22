@@ -41,7 +41,7 @@ Engine::Engine(int size) :
 void Engine::draw() const {
   SDL_Color Name_color = {255, 100, 0, 255};
   board.drawTiles();
-  //io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
+  io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
 
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->draw();
@@ -51,7 +51,11 @@ void Engine::draw() const {
     HUD->draw();
     std::stringstream fps;
     fps << clock.getFps();
-    //io.writeText(fps.str(), 0, 0, Name_color);
+    io.writeText(fps.str(), 200, 25, Name_color);
+    int objs = board.getObjects();
+    std::stringstream obj_strm;
+    obj_strm << "OBJECTS: " << objs;
+    io.writeText(obj_strm.str(), 800, 25, Name_color);
     if (board.humanHasBow) {
       HUD->humanBow->draw();
     }
@@ -98,6 +102,7 @@ void Engine::No_HUD() {
 }
 
 void Engine::play() {
+  SDL_Color color = {255, 100, 0, 255};
   srand(time(NULL));
   SDL_Event event;
   const Uint8* keystate;
@@ -162,67 +167,74 @@ void Engine::play() {
             else clock.pause();
             (*music)[0];
           }
+          /* MUSIC PAUSED =================================================== */
           if ( keystate[SDL_SCANCODE_SPACE] ) {
             music->toggleMusic();
           }
-          //F1 has key bounce pretty bad
+          /*F1 has key bounce pretty bad ==================================== */
           else if (keystate[SDL_SCANCODE_F1]) {
             if (!HUD_ON) Active_HUD();
             else No_HUD();
             (*music)[0];
           }
+          /* A ============================================================== */
           else if (keystate[SDL_SCANCODE_A]) {
             action_registered = true;
-            board.movePlayer(0, 0, 100);
             (*music)[1];
+            int ret_val = board.movePlayer(0, 0, 100);
+            if (ret_val == 1) {
+                (*music)[2];
+                board.human = new Player("human", 1, 1);
+            } else if (ret_val == 2) {
+                (*music)[2];
+                board.ai = new Player("AI", 8, 9);
+            }
           }
+          /* D ============================================================== */
           else if (keystate[SDL_SCANCODE_D]) {
             action_registered = true;
-            board.movePlayer(0, 1, 100);
             (*music)[1];
+            int ret_val = board.movePlayer(0, 1, 100);
+            if (ret_val == 1) {
+                (*music)[2];
+                board.human = new Player("human", 1, 1);
+            } else if (ret_val == 2) {
+                (*music)[2];
+                board.ai = new Player("AI", 8, 9);
+            }
           }
+          /* W ============================================================== */
           else if (keystate[SDL_SCANCODE_W]) {
             action_registered = true;
-            board.movePlayer(0, 2, 100);
             (*music)[1];
+            int ret_val = board.movePlayer(0, 2, 100);
+            if (ret_val == 1) {
+                (*music)[2];
+                board.human = new Player("human", 1, 1);
+            } else if (ret_val == 2) {
+                (*music)[2];
+                board.ai = new Player("AI", 8, 9);
+            }
           }
+          /* S ============================================================== */
           else if (keystate[SDL_SCANCODE_S]) {
             action_registered = true;
-            board.movePlayer(0, 3, 100);
             (*music)[1];
+            int ret_val = board.movePlayer(0, 3, 100);
+            if (ret_val == 1) {
+                (*music)[2];
+                board.human = new Player("human", 1, 1);
+            } else if (ret_val == 2) {
+                (*music)[2];
+                board.ai = new Player("AI", 8, 9);
+            }
           }
+          /* F ============================================================== */
           /* If F is pressed: */
           else if (keystate[SDL_SCANCODE_F]) {
             if (board.humanHasBow) {
-              board.shootProjectile(board.human->getCurRow(), board.human->getCurCol(), board.human->getCurRow() + 3, board.human->getCurCol());
-              // while ( SDL_PollEvent(&event) ) {
-              //   std::cout << "Waiting for key press..." << std::endl;
-              //   keystate = SDL_GetKeyboardState(NULL);
-              //   if(event.type == SDL_KEYDOWN) {
-              //     if (keystate[SDL_SCANCODE_A]) {
-              //       action_registered = true;
-              //       //board.movePlayer(0, 0, 100);
-              //       (*music)[1];
-              //     }
-              //     else if (keystate[SDL_SCANCODE_D]) {
-              //       action_registered = true;
-              //       //board.movePlayer(0, 1, 100);
-              //       (*music)[1];
-              //     }
-              //     else if (keystate[SDL_SCANCODE_W]) {
-              //       action_registered = true;
-              //       //board.movePlayer(0, 2, 100);
-              //       (*music)[1];
-              //     }
-              //     else if (keystate[SDL_SCANCODE_S]) {
-              //       action_registered = true;
-              //       //board.movePlayer(0, 3, 100);
-              //       (*music)[1];
-              //     }
-              //   }
-              // }
+              board.createProjectile(board.human->getCurRow(), board.human->getCurCol());
               std::cout << "human wants to shoot with bow!" << std::endl;
-              //board.shootProjectile(human->getCurRow(), human->getCurCol())
             }
           }
         }

@@ -29,6 +29,7 @@ OBJS = \
 	HUDDisplay.o \
 	item.o \
 	sound.o \
+	Projectile.o \
 	main.o
 EXEC = run
 

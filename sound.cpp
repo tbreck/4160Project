@@ -41,6 +41,7 @@ SDLSound::SDLSound() :
 
   sounds.push_back( Mix_LoadWAV("assets/Music/ding.ogg") );
   sounds.push_back( Mix_LoadWAV("assets/Music/whoop.ogg") );
+  sounds.push_back( Mix_LoadWAV("assets/Music/death.wav") );
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
   std::cout << "Music and Sound is loaded" << std::endl;
 }

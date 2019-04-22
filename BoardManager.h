@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "sprite.h"
 #include "item.h"
+#include "Projectile.h"
 #include "imageFactory.h"
 #include <vector>
 
@@ -19,20 +20,22 @@ public:
   void update(Uint32 ticks);
   ~BoardManager();
   Drawable* getTile();
-  void movePlayer(int, int, int);
+  int movePlayer(int, int, int);
   int getPlayerX(int);
   int getPlayerY(int);
   bool playerHasBow(int) const;
+  void createProjectile(int row, int col);
+  int getObjects() const;
   bool humanHasBow;
   bool AIHasBow;
-  void shootProjectile(int x1, int y1, int x2, int y2);
   Player *human;
   Player *ai;
 private:
   std::vector<std::vector<BackgroundTile*>> tiles;
+  std::vector<Projectile*> projectiles;
   //std::vector<std::vector<Item*>> items;
   Item *items[10][10];
-  std::vector<Player> players;
+  //std::vector<Player> players;
   int map[10][10];
   unsigned int size;
 };

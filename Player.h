@@ -24,11 +24,11 @@ public:
   ~Player();
   int cur_row, cur_col;
   bool bow;
+  int current_frame;
 
 private:
 
   std::vector<Image*> sprites;
-  int current_frame;
   int anim_frames;
   int damage_frame;
   //std::vector<Item*> held_items;
