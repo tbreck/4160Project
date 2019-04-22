@@ -31,10 +31,6 @@ private:
   std::vector<Image*> sprites;
   int anim_frames;
   int damage_frame;
-  //std::vector<Item*> held_items;
-  int health;
-  int movements_left;
-  int attacks_left;
   int frame_interval;
   int ellapsed_time;
   int total_tiles;

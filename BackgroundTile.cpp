@@ -34,9 +34,6 @@ BackgroundTile::BackgroundTile(const std::string& tile_id,
                                int x, int y, int _ID) :
   Drawable(tile_id, Vector2f(x, y), Vector2f(0, 0), 1.0),
   tile( ImageFactory::getInstance().getImage(tile_id) ),
-  player_on_tile(false),
-  x_offset(x),
-  y_offset(y),
   life_span(0),
   ID(_ID) {
     /* Set item states and walkable state based on the ID based in. */

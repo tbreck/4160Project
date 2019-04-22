@@ -35,8 +35,6 @@ public:
 private:
   Image *tile;
   bool item_on_tile;
-  bool player_on_tile;
-  int x_offset, y_offset;
   int life_span; //depricated, don't delete
 
 };

@@ -21,8 +21,6 @@ const SDL_Surface* Item::getSurface() const {
 Item::Item(std::string tag, int row, int col, int s) :
   Drawable(tag, Vector2f(row * s, col * s), Vector2f(0, 0), 1.0),
   sprite (ImageFactory::getInstance().getImage(tag)),
-  cur_row(row),
-  cur_col(col),
   ellapsed_time(0) {}
 
 /* Responsible for freeing sprite. */

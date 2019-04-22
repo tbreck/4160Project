@@ -22,7 +22,7 @@ public:
   ~Item();
 private:
   Image * sprite;
-  int cur_row, cur_col;
+  // int cur_row, cur_col;
   int ellapsed_time;
 };
 

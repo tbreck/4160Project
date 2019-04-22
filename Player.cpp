@@ -49,10 +49,7 @@ Player::Player(std::string tag, int row, int col) :
   current_frame(0),
   anim_frames(Gamedata::getInstance().getXmlInt(name+"/animFrame")),
   damage_frame(Gamedata::getInstance().getXmlInt(name+"/damageFrame")),
-  health(100),
   bow(false),
-  movements_left(1),
-  attacks_left(1),
   frame_interval(Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   ellapsed_time(0),
   total_tiles(Gamedata::getInstance().getXmlInt("Tiles")) {}

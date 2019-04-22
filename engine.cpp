@@ -102,12 +102,10 @@ void Engine::No_HUD() {
 }
 
 void Engine::play() {
-  SDL_Color color = {255, 100, 0, 255};
   srand(time(NULL));
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
-  bool music_playing = false;
   Uint32 ticks = clock.getElapsedTicks();
   FrameGenerator frameGen;
 
