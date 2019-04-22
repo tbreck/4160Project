@@ -1,21 +1,30 @@
-Name: Colt Gainey & Tanner Breckenridge
+Name: Tanner Breckenridge & Colt Gainey
 
 Course: CPSC 4160
 
-Clemson Email Address: ctgaine@clemson.edu tbrecke@clemson.edu
+Clemson Email Address: tbrecke@clemson.edu
+               ctgaine@clemson.edu
 
-Project no: #4
+Project no: #5
 
-Project due date: Feb 29th (sorry)
+Project due date: 8 AM Monday, April 22nd, 2019
 
-Project description: Create a game in SDL with AI that reacts to you.
+Project description: Add an Object Pool, Explosions, Projectiles,
+                     Sound and Music.
 
-The easiest part of this project: Very little was easy because I can be dumb
+The easiest part of this project: The easiest part was the object pool.
 
-Problems that I had in completing this project: Mostly everything was hard
-because I can be dumb
+Problems that I had in completing this project: Getting the music to work correctly was a bit of a challenge. We ended up using .ogg files because they
+    work as well as the .wav and they are much smaller file sizes. Another issue that we had was the getting the HUD to appear correctly which was
+    helped solve during office hours.
 
-A few sentences describing my proposed project: 
-	Tile based turn based combat with an indeterminate number of players / 
-	AI. Items are on the battlefield, and can be picked up to deal damage.
-	Walkable / Impassable tiles.
+Where did I get my Sound and Music? Colt made the music and the sound effects himself. The only sound that we did copy is the death sound which is the
+    'oof' death sound from Roblox. (Just because it is such a great sound)
+
+What Objects did I pool? The two players, the 6 crates, and then the items that are held after picking up a crate.
+
+Notes:
+- All graphics were custom made
+- Yes, we really tried to do things differently
+- Because of the last bullet, our code has resulted into a lot of "Hacky" code (sorry), but it got the job done
+- In the XML, the map is fully customizable to be whatever you want it to be (There's a tile legend above it)
