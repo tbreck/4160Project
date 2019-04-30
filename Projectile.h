@@ -18,12 +18,14 @@ public:
   int getCurCol() const;
   virtual const Image* getImage() const;
   virtual const SDL_Surface* getSurface() const;
+  int getID();
   Projectile(std::string, int, int);
   Projectile(const Projectile&) = delete;
   Projectile& operator=(const Projectile&) = delete;
   ~Projectile();
 private:
   Image * sprite;
+  int ID;
   int ellapsed_time;
   int cur_row, cur_col;
 };

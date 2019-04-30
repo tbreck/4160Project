@@ -39,8 +39,17 @@ Projectile::Projectile(std::string tag, int row, int col) :
   sprite (ImageFactory::getInstance().getImage(tag)),
   cur_row(row),
   cur_col(col),
-  ellapsed_time(0) {}
+  ellapsed_time(0) {
+    if (tag == "Left_Arrow") ID = 0;
+    else if (tag == "Right_Arrow") ID = 1;
+    else if (tag == "Up_Arrow") ID = 2;
+    else if (tag == "Down_Arrow") ID = 3;
+  }
 
 Projectile::~Projectile() {
   delete sprite;
+}
+
+int Projectile::getID() {
+  return ID;
 }

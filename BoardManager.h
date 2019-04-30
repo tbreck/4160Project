@@ -24,7 +24,7 @@ public:
   int getPlayerX(int);
   int getPlayerY(int);
   bool playerHasBow(int) const;
-  void createProjectile(int row, int col);
+  void createProjectile(int row, int col, int dir);
   int getObjects() const;
   bool humanHasBow;
   bool AIHasBow;

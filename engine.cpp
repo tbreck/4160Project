@@ -123,6 +123,9 @@ void Engine::play() {
       /* Flip a coin to see if we will go up or down. */
       if (rand() % 2 == 0) {
         /* If the player is to the right, go right. */
+        if (board.AIHasBow) {
+          board.createProjectile(board.ai->getCurRow(), board.ai->getCurCol(), (rand() % 3));
+        }
         if (player_x > ai_x) board.movePlayer(1, 1, 100);
         /* Otherwise, go left. */
         else board.movePlayer(1, 0, 100);
@@ -230,9 +233,29 @@ void Engine::play() {
           /* F ============================================================== */
           /* If F is pressed: */
           else if (keystate[SDL_SCANCODE_F]) {
+            //if (board.humanHasBow) {
+              //board.createProjectile(board.human->getCurRow(), board.human->getCurCol());
+              //std::cout << "human wants to shoot with bow!" << std::endl;
+            //}
+          }
+          else if (keystate[SDL_SCANCODE_LEFT]) {
             if (board.humanHasBow) {
-              board.createProjectile(board.human->getCurRow(), board.human->getCurCol());
-              std::cout << "human wants to shoot with bow!" << std::endl;
+              board.createProjectile(board.human->getCurRow(), board.human->getCurCol(), 0);
+            }
+          }
+          else if (keystate[SDL_SCANCODE_RIGHT]) {
+            if (board.humanHasBow) {
+              board.createProjectile(board.human->getCurRow(), board.human->getCurCol(), 1);
+            }
+          }
+          else if (keystate[SDL_SCANCODE_UP]) {
+            if (board.humanHasBow) {
+              board.createProjectile(board.human->getCurRow(), board.human->getCurCol(), 2);
+            }
+          }
+          else if (keystate[SDL_SCANCODE_DOWN]) {
+            if (board.humanHasBow) {
+              board.createProjectile(board.human->getCurRow(), board.human->getCurCol(), 3);
             }
           }
         }
