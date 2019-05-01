@@ -26,6 +26,7 @@ public:
   bool playerHasBow(int) const;
   void createProjectile(int row, int col, int dir);
   int getObjects() const;
+  void godMode();
   bool humanHasBow;
   bool AIHasBow;
   Player *human;

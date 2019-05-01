@@ -110,11 +110,8 @@ void Engine::play() {
   FrameGenerator frameGen;
 
   int cur_player = 0;
-  // int HUD_toggle = 0;
 
   while ( !done ) {
-    //if (!music_playing) music->toggleMusic();
-    // bool f1_pressed = false;
     if ((cur_player % 2) == 1) {
       int player_x = board.getPlayerX(0);
       int ai_x = board.getPlayerX(1);
@@ -155,7 +152,7 @@ void Engine::play() {
         }
         while ( SDL_PollEvent(&event) ) {
         keystate = SDL_GetKeyboardState(NULL);
-        if (event.type ==  SDL_QUIT) { done = true; break; }
+        if (event.type ==  SDL_QUIT) { done = true; action_registered = true; break; }
         if(event.type == SDL_KEYDOWN) {
           if (keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_Q]) {
             done = true;
@@ -237,6 +234,11 @@ void Engine::play() {
               //board.createProjectile(board.human->getCurRow(), board.human->getCurCol());
               //std::cout << "human wants to shoot with bow!" << std::endl;
             //}
+          }
+          /* G ============================================================== */
+          else if (keystate[SDL_SCANCODE_G]) {
+            board.godMode();
+            std::cout << "God Mode Toggled! You cheater...." << std::endl;
           }
           else if (keystate[SDL_SCANCODE_LEFT]) {
             if (board.humanHasBow) {

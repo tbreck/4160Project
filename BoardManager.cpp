@@ -104,8 +104,6 @@ void BoardManager::update(Uint32 ticks) {
 BoardManager::~BoardManager() {
   for (auto& row : tiles)
     for (auto& tile : row) delete tile;
-  // delete human;
-  // delete ai;
 }
 /*==============================================================================
 ==============================================================================*/
@@ -138,6 +136,13 @@ int BoardManager::getObjects() const {
   total_objs += projectiles.size();
   return total_objs;
 }
+/*==============================================================================
+==============================================================================*/
+void BoardManager::godMode() {
+  if (!human->godmode) human->godmode = true;
+  else human->godmode = false;
+}
+
 /*==============================================================================
 ==============================================================================*/
 int BoardManager::movePlayer(int player, int dir, int t) {
@@ -201,6 +206,7 @@ int BoardManager::movePlayer(int player, int dir, int t) {
      items[ai->cur_row][ai->cur_col] = new Item("Crate", -1, -1, 100);
      ai->bow = true;
   }
+  /* Setting the Human/AI that they have a bow to work with */
   if (human->bow == true) humanHasBow = true;
   if (ai->bow == true) AIHasBow = true;
 
@@ -208,6 +214,8 @@ int BoardManager::movePlayer(int player, int dir, int t) {
   bool player_hit = false;
   bool ai_hit = false;
   for (auto &projectile: projectiles) {
+    projectile->moveDirection(projectile->getID(), 50);
+
     /* If the arrow collides with a wall, delete it. */
     if (map[projectile->getCurRow()][projectile->getCurCol()] != 3 &&
        (map[projectile->getCurRow()][projectile->getCurCol()] != 4)) {
@@ -216,8 +224,11 @@ int BoardManager::movePlayer(int player, int dir, int t) {
     } else if (human->getCurRow() == projectile->getCurRow() &&
                human->getCurCol() == projectile->getCurCol()){
          std::cout << "Hit on human detected!\n";
+         if (!human->godmode) {
          projectile = new Projectile("Up_Arrow", -1, -1);
          player_hit = true;
+       }
+       else std::cout << "Ignored hit!\n";
     /* If the arrow collides with the AI, the AI dies. */
     } else if (ai->getCurRow() == projectile->getCurRow() &&
                ai->getCurCol() == projectile->getCurCol()){
@@ -225,12 +236,13 @@ int BoardManager::movePlayer(int player, int dir, int t) {
          projectile = new Projectile("Up_Arrow", -1, -1);
          ai_hit = true;
     /* Otherwise, the arrow continues forward. */
-    } else {
-        projectile->moveDirection(projectile->getID(), 50);
     }
+    // else {
+    //     projectile->moveDirection(projectile->getID(), 50);
+    // }
   }
   /* Necessary for some reason. Can't return in the above if chain. */
-  if (player_hit) return 1;
   if (ai_hit) return 2;
+  else if (player_hit) return 1;
   return 0;
 }

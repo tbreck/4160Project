@@ -24,6 +24,7 @@ public:
   ~Player();
   int cur_row, cur_col;
   bool bow;
+  bool godmode;
   int current_frame;
 
 private:

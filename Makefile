@@ -1,45 +1,47 @@
+
 CXX = g++
 
-# Warnings frequently signal eventual errors:
-CXXFLAGS=`sdl2-config --cflags` -g -W -Wall -std=c++11 -O0 -I `sdl2-config --prefix`/include/
+DEPDIR := .deps
+$(shell mkdir -p $(DEPDIR) >/dev/null)
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$(basename $*).Td
 
-LDFLAGS = `sdl2-config --libs` -lm -lexpat -lSDL2_ttf -lSDL2_image -lSDL2_mixer
+CXXFLAGS = `sdl2-config --cflags` -g -W -Wall -std=c++11 -Weffc++ -Wextra -pedantic -O0 -I `sdl2-config --prefix`/include/
 
+LDFLAGS = `sdl2-config --libs` -lm -lSDL2_image -lexpat -lSDL2_ttf -lSDL2_mixer
 
-OBJS = \
-  renderContext.o \
-	ioMod.o \
-	parseXML.o \
-	gameData.o \
-	viewport.o \
-	world.o \
-	spriteSheet.o \
-	image.o \
-	imageFactory.o \
-	frameGenerator.o \
-	sprite.o \
-	multisprite.o \
-	vector2f.o \
-	clock.o \
-	engine.o \
-	MultiFrameSprite.o \
-	BackgroundTile.o \
-	BoardManager.o \
-	Player.o \
-	HUDDisplay.o \
-	item.o \
-	sound.o \
-	Projectile.o \
-	main.o
+SRCPTH = $(shell find . -regex ".*\.cpp" | tr '\n' ' ')
+SRCFLS = $(notdir $(SRCPTH))
+SRCDIR = $(dir $(SRCPTH))
+
+OBJDIR  = build
+$(shell mkdir -p $(OBJDIR) >/dev/null)
+OBJFLS = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRCFLS))
+
 EXEC = run
 
-%.o: %.cpp %.h
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+VPATH = $(SRCDIR)
 
-$(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+$(OBJDIR)/%.o: %.cpp
+$(OBJDIR)/%.o: %.cpp $(DEPDIR)/%.d
+	@echo "Creating Object $(notdir $@)"
+	@$(CXX) $(DEPFLAGS) $(CXXFLAGS) -c $< -o $@
+	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d && touch $@
+
+$(EXEC): $(OBJFLS)
+	@echo "Creating Executable $@"
+	@$(CXX) $(CXXFLAGS) -o $@ $(OBJFLS) $(LDFLAGS)
 
 clean:
-	rm -rf $(OBJS)
-	rm -rf $(EXEC)
-	rm -rf frames/*.bmp
+	@echo "Deleting Objects"
+	@rm -rf $(OBJDIR)
+	@echo "Deleting Executable"
+	@rm -rf $(EXEC)
+	@echo "Deleting Dependecy List"
+	@rm -rf $(DEPDIR)
+	@echo "Deleting Images"
+	@rm -rf frames/*.bmp
+
+include $(wildcard $(patsubst %,$(DEPDIR)/%.d,$(notdir $(basename $(OBJFLS)))))
