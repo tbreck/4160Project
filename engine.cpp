@@ -51,7 +51,7 @@ void Engine::draw() const {
     HUD->draw();
     std::stringstream fps;
     fps << clock.getFps();
-    io.writeText(fps.str(), 200, 25, Name_color);
+    io.writeText(fps.str(), 270, 125, Name_color);
     int objs = board.getObjects();
     std::stringstream obj_strm;
     obj_strm << "OBJECTS: " << objs;
@@ -62,7 +62,6 @@ void Engine::draw() const {
     if (board.AIHasBow) {
       HUD->AIBow->draw();
     }
-    //io.writeText("W A S D to move!", 20, 30, Name_color);
   } else if (!HUD_ON){
     HUD->setX(-1000);
     HUD->draw();
