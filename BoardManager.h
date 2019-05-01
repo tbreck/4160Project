@@ -27,10 +27,12 @@ public:
   void createProjectile(int row, int col, int dir);
   int getObjects() const;
   void godMode();
+  void updateStatus();
   bool humanHasBow;
   bool AIHasBow;
   Player *human;
   Player *ai;
+  bool endgame;
 private:
   std::vector<std::vector<BackgroundTile*>> tiles;
   std::vector<Projectile*> projectiles;

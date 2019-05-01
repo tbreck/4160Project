@@ -38,13 +38,20 @@ makeVideo( false )
   std::cout << "Construction of Engine complete" << std::endl;
 }
 
-void Engine::draw() const {
+void Engine::draw() {
   SDL_Color Name_color = {255, 100, 0, 255};
   board.drawTiles();
   io.writeText("Colt Gainey & Tanner Breckenridge", 20, 900, Name_color);
 
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->draw();
+  }
+  if (board.endgame) {
+    (*music)[2];
+    io.writeText("Press R to Restart the game", 365, 500);
+    clock.pause();
+    /* This is a very hacky way to create a restart */
+    board.updateStatus();
   }
   if (HUD_ON){
     HUD->setX(0);
@@ -62,7 +69,7 @@ void Engine::draw() const {
     if (board.AIHasBow) {
       HUD->AIBow->draw();
     }
-  } else if (!HUD_ON){
+  } else if (!HUD_ON){ // .... yes we know this is hacky
     HUD->setX(-1000);
     HUD->draw();
   }
@@ -179,12 +186,8 @@ void Engine::play() {
               action_registered = true;
               (*music)[1];
               int ret_val = board.movePlayer(0, 0, 100);
-              if (ret_val == 1) {
+              if (ret_val != 0) {
                 (*music)[2];
-                board.human = new Player("human", 1, 1);
-              } else if (ret_val == 2) {
-                (*music)[2];
-                board.ai = new Player("AI", 8, 9);
               }
             }
             /* D ============================================================== */
@@ -192,12 +195,8 @@ void Engine::play() {
               action_registered = true;
               (*music)[1];
               int ret_val = board.movePlayer(0, 1, 100);
-              if (ret_val == 1) {
+              if (ret_val != 0) {
                 (*music)[2];
-                board.human = new Player("human", 1, 1);
-              } else if (ret_val == 2) {
-                (*music)[2];
-                board.ai = new Player("AI", 8, 9);
               }
             }
             /* W ============================================================== */
@@ -205,12 +204,8 @@ void Engine::play() {
               action_registered = true;
               (*music)[1];
               int ret_val = board.movePlayer(0, 2, 100);
-              if (ret_val == 1) {
+              if (ret_val != 0) {
                 (*music)[2];
-                board.human = new Player("human", 1, 1);
-              } else if (ret_val == 2) {
-                (*music)[2];
-                board.ai = new Player("AI", 8, 9);
               }
             }
             /* S ============================================================== */
@@ -218,20 +213,18 @@ void Engine::play() {
               action_registered = true;
               (*music)[1];
               int ret_val = board.movePlayer(0, 3, 100);
-              if (ret_val == 1) {
+              if (ret_val != 0) {
                 (*music)[2];
-                board.human = new Player("human", 1, 1);
-              } else if (ret_val == 2) {
-                (*music)[2];
-                board.ai = new Player("AI", 8, 9);
               }
             }
             /* R ============================================================== */
             else if (keystate[SDL_SCANCODE_R]) {
+              clock.unpause();
               board.human = new Player("human", 0, 0);
-              board.ai = new Player("human", 8, 9);
-              SDL_Color text_color = {255, 255, 255, 255};
-              io.writeText("New Game!", 300, 500, text_color);
+              board.humanHasBow = false;
+              board.ai = new Player("AI", 8, 9);
+              board.AIHasBow = false;
+
             }
             /* G ============================================================== */
             else if (keystate[SDL_SCANCODE_G]) {
@@ -266,3 +259,9 @@ void Engine::play() {
     cur_player++;
   }
 }
+
+
+// if ( sprites.size() == 0 && explosionsFinished ) {
+//     io.writeText("Press R to Restart the game", 250, 200);
+//     clock.pause();
+//   }

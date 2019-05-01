@@ -33,9 +33,9 @@ const SDL_Surface* BackgroundTile::getSurface() const {
 BackgroundTile::BackgroundTile(const std::string& tile_id,
                                int x, int y, int _ID) :
   Drawable(tile_id, Vector2f(x, y), Vector2f(0, 0), 1.0),
+  ID(_ID),
   tile( ImageFactory::getInstance().getImage(tile_id) ),
-  life_span(0),
-  ID(_ID) {
+  life_span(0) {
     /* Set item states and walkable state based on the ID based in. */
     switch (ID) {
       case 1: isWalkable = false; item_on_tile = false; break;

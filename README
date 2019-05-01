@@ -1,0 +1,24 @@
+Name: Tanner Breckenridge & Colt Gainey
+
+Course: CPSC 4160
+
+Clemson Email Address: tbrecke@clemson.edu
+		       ctgaine@clemson.edu
+
+Final Project: #6
+
+Project due date: May 1st, 2019 at 8 AM
+
+Project description: Final Project for Presentation 
+
+The Pizzazz feature that I added:
+- All of the art work and audio is original 
+	- (except for the death sound credits to ROBLOX) it's meant to be a joke
+- I find it interesting that were doing a 2D board game using tiles
+- My favorite part is that the Map is full customizable 
+	- there are 3 examples in assets/maps.txt
+	- just copy and paste those into the XML document
+- Having the ability to shoot arrows in all 4 directions
+- The arrows and players both have wall detection
+
+

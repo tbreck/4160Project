@@ -41,7 +41,7 @@ private:
 
   bool makeVideo;
 
-  void draw() const;
+  void draw();
   void update(Uint32);
 
   void printScales() const;

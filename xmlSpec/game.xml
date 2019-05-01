@@ -2,7 +2,7 @@
 <GameData>
 <!-- screenTitle is also used to identify you and your animation.
      So make sure to include your name as part of the screenTitle -->
-<title>YøLø</title>
+<title>tbrecke and ctgaine</title>
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>true</frameCapOn>
@@ -31,7 +31,6 @@ Tile8: Bend S->E
 <t80>3</t80> <t81>3</t81> <t82>3</t82> <t83>3</t83> <t84>3</t84> <t85>3</t85> <t86>3</t86> <t87>3</t87> <t88>3</t88> <t89>3</t89>
 <t90>3</t90> <t91>3</t91> <t92>3</t92> <t93>3</t93> <t94>3</t94> <t95>3</t95> <t96>3</t96> <t97>3</t97> <t98>3</t98> <t99>8</t99>
 </map>
-
 <maxFrames>300</maxFrames>
 <username>ctgaine and tbrecke</username>
 

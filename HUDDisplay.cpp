@@ -22,10 +22,10 @@ const SDL_Surface* HUDDisplay::getSurface() const {
 }
 HUDDisplay::HUDDisplay(const std::string& HUD_image) :
   Drawable(HUD_image, Vector2f(0, 0), Vector2f(0, 0), 1.0),
-  HUD( ImageFactory::getInstance().getImage(HUD_image) ),
-  life_span(0),
   humanHasBow(false),
-  AIHasBow(false) {
+  AIHasBow(false),
+  HUD( ImageFactory::getInstance().getImage(HUD_image) ),
+  life_span(0) {
     humanBow = new Item("Bow", 289, 15, 1);
     AIBow = new Item("Bow", 672, 15, 1);
   }

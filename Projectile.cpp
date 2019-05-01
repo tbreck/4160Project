@@ -37,9 +37,9 @@ const SDL_Surface* Projectile::getSurface() const {
 Projectile::Projectile(std::string tag, int row, int col) :
   Drawable(tag, Vector2f(row * 100, col * 100), Vector2f(0, 0), 1.0),
   sprite (ImageFactory::getInstance().getImage(tag)),
+  ellapsed_time(0),
   cur_row(row),
-  cur_col(col),
-  ellapsed_time(0) {
+  cur_col(col) {
     if (tag == "Left_Arrow") ID = 0;
     else if (tag == "Right_Arrow") ID = 1;
     else if (tag == "Up_Arrow") ID = 2;

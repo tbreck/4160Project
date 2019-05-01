@@ -45,6 +45,7 @@ BoardManager::BoardManager(int s){
 
   this->human = new Player("human", 0, 0);
   this->ai = new Player("AI", 8, 9);
+  endgame = false;
 }
 /*==============================================================================
 ==============================================================================*/
@@ -227,6 +228,8 @@ int BoardManager::movePlayer(int player, int dir, int t) {
          if (!human->godmode) {
          projectile = new Projectile("Up_Arrow", -1, -1);
          player_hit = true;
+         endgame = true;
+         return 1;
        }
        else std::cout << "Ignored hit!\n";
     /* If the arrow collides with the AI, the AI dies. */
@@ -235,6 +238,8 @@ int BoardManager::movePlayer(int player, int dir, int t) {
          std::cout << "Hit on AI detected!\n";
          projectile = new Projectile("Up_Arrow", -1, -1);
          ai_hit = true;
+         endgame = true;
+         return 2;
     /* Otherwise, the arrow continues forward. */
     }
     // else {
@@ -244,5 +249,8 @@ int BoardManager::movePlayer(int player, int dir, int t) {
   /* Necessary for some reason. Can't return in the above if chain. */
   if (ai_hit) return 2;
   else if (player_hit) return 1;
-  return 0;
+  else return 0;
+}
+void BoardManager::updateStatus(){
+  endgame = false;
 }
